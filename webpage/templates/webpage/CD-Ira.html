@@ -1,0 +1,72 @@
+{% extends 'webpage/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+  
+	<div class="hero overlay inner-page">
+
+        <div data-aos="fade-up">
+        <img src="{% static 'images/ContentImageHandler.ashx-23.jpg' %}" alt="Image">
+    </div>
+
+		<div class="container" style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
+			<div class="row align-items-center justify-content-center pt-5">
+				<div class="col-lg-6 text-center pe-lg-5">
+					<h1 class="heading text-white mb-3" data-aos="fade-up">CDs & IRAs</h1>
+					<div class="align-items-center mb-4" data-aos="fade-up" data-aos-delay="200">
+						<a href="{% url 'rates' %}" class="btn btn-outline-white-reverse me-4">See Rates</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    
+
+    <div class="container">
+        <div style="padding:20px;"></div>
+        <h2 class="heading text-primary">Certificates of Deposit</h2>
+        <p style="font-weight:bold;">In order to meet your investment needs, we offer a wide variety of rates and terms.</p>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col"> Term</th>
+                    <th>Automatically Renewable</th>
+                 </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                        <div>
+                            <ul>
+                                <li>31 days</li>
+                                <li>91 days</li>
+                                <li>182 days</li>
+                                <li>1 year</li>
+                                <li>2 1/2 Years</li>
+                                <li>5 years</li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>yes</td>
+
+                  
+                 </tbody>
+            </table>
+        </div>
+
+
+        <div style="padding:20px;"></div>
+
+        <h2 class="heading text-primary">Individual Retirement Accounts</h2>
+        <p>Saving now for retirement is a smart choice. Choosing one of our Individual, Roth or Educational IRA's will enable you to earn a competitive interest rate and receive special tax benefits.</p>
+  </div>
+
+
+{% endblock content %}

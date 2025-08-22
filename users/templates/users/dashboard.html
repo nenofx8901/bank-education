@@ -1,0 +1,423 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+  
+ 
+  <div>
+        
+      <P>Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}} ( Checking Account )</P>
+  </div>
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+
+
+<!-- Revenue Card -->
+<div class="col-lg-8">
+  <div class="card info-card revenue-card">
+    <div class="card-body">
+      <h5 class="card-title">Available Balance</h5>
+
+      <div class="d-flex align-items-center">
+        <div class="ps-3">
+          <h6 id="balance-value" data-balance="${{request.user.reg.account_balance|intcomma}}.00">${{request.user.reg.account_balance|intcomma}}.00</h6>
+        <span class="text-muted small pt-2 ps-1">(Checking Account)</span>
+        </div>
+
+        <div style="position:absolute; top:10px; right:16px; font-size:10px; font-weight: bold;"> <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i> {{request.user.reg.status}}</div>
+        <div style="position:absolute; top:10px; right:16px; font-size:10px; font-weight: bold;">
+          <i class='bi bi-circle-fill activity-badge align-self-start {% if request.user.reg.status|lower == "active" %}text-success{% elif request.user.reg.status|lower == "suspended" %}text-warning{% else %}text-secondary{% endif %}'></i>
+          {{request.user.reg.status}}
+        </div>
+
+
+        <div style="position:absolute; bottom:10px; right:16px; font-size:10px; font-weight: bold;">
+
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="hideBalanceSwitch" onclick="toggleBalance()">
+            <label class="form-check-label" for="hideBalanceSwitch">Hide Balance</label>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div style="padding-left:20px; padding-bottom: 10px;" >
+      <span style="border-radius: 8px; padding: 10px; font-size: xx-small; background-color: whitesmoke; font-weight: bold;">{{request.user.reg.account_no}}</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- Quick Actions Section -->
+<div class="actions">
+      <div class="action-item">
+        <a href="{% url 'transfer' %}">
+          <div class="circle-btn"><i class="fas fa-exchange-alt"></i></div>
+          <span>Transfer</span>
+        </a>
+      </div>
+      <div class="action-item">
+        <a href="{% url 'spending' %}">
+          <div class="circle-btn"><i class="fas fa-chart-pie"></i></div>
+          <span>Spending</span>
+        </a>
+      </div>
+      <div class="action-item">
+        <a href="#" onclick="showMobilePinPopup(event)">
+          <div class="circle-btn"><i class="fas fa-shield-alt"></i></div>
+          <span>MobilePIN</span>
+        </a>
+      </div>
+</div>
+           
+
+
+  <div class="col-12">
+    <div class="card recent-sales overflow-auto transaction-mobile" style="background:transparent;box-shadow:none;max-width:720px;margin:auto;">
+      <div class="card-body">
+        <h5 class="card-title">Recent Transactions</h5>
+        <div style="position:absolute; top:40px; right:16px; font-size:10px;"> <a href=""></a> </div>
+
+        <div class="transaction-list" style="display:flex;flex-direction:column;gap:16px;">
+          {% for historys in history %}
+          <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:1.1em;">{{ historys.description }}</div>
+              <div style="font-size:0.95em;color:#888;margin-top:2px;">{{ historys.date|date:"M d" }}, Checking</div>
+            </div>
+            <div style="font-weight:700;font-size:1.1em;{% if historys.amount > 0 %}color:#1db954;{% else %}color:#222;{% endif %}">
+              {% if historys.amount > 0 %}
+                <span style="color:#1db954;">+${{ historys.amount|floatformat:2|intcomma }}</span>
+              {% else %}
+                <span style="color:#222;">-${% if historys.amount < 0 %}{{ historys.amount|floatformat:2|intcomma|slice:'1:' }}{% else %}{{ historys.amount|floatformat:2|intcomma }}{% endif %}</span>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+          <!-- First 5 transactions visible by default -->
+          <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:1.1em;">Salary Deposit</div>
+              <div style="font-size:0.95em;color:#888;margin-top:2px;">Jan 02, Checking</div>
+            </div>
+            <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+              <span style="color:#1db954;">+$120,000.00</span>
+            </div>
+          </div>
+          <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:1.1em;">Rent Payment</div>
+              <div style="font-size:0.95em;color:#888;margin-top:2px;">Jan 05, Checking</div>
+            </div>
+            <div style="font-weight:700;font-size:1.1em;color:#222;">
+              <span style="color:#222;">-$3,200.00</span>
+            </div>
+          </div>
+          <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:1.1em;">Grocery Shopping</div>
+              <div style="font-size:0.95em;color:#888;margin-top:2px;">Jan 08, Checking</div>
+            </div>
+            <div style="font-weight:700;font-size:1.1em;color:#222;">
+              <span style="color:#222;">-$450.00</span>
+            </div>
+          </div>
+          <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:1.1em;">Received from John Doe</div>
+              <div style="font-size:0.95em;color:#888;margin-top:2px;">Jan 10, Checking</div>
+            </div>
+            <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+              <span style="color:#1db954;">+$2,500.00</span>
+            </div>
+          </div>
+          <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:1.1em;">Utility Bill Payment</div>
+              <div style="font-size:0.95em;color:#888;margin-top:2px;">Jan 15, Checking</div>
+            </div>
+            <div style="font-weight:700;font-size:1.1em;color:#222;">
+              <span style="color:#222;">-$320.00</span>
+            </div>
+          </div>
+          <!-- Hidden transactions -->
+          <div id="hidden-transactions" class="hidden-transactions" style="gap:16px;">
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">ATM Withdrawal</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Jan 18, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$1,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Transfer to Savings</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Feb 01, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$10,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Received from Jane Smith</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Feb 10, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+                <span style="color:#1db954;">+$5,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Online Shopping</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Feb 15, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$1,200.00</span>
+              </div>
+            </div>
+            <!-- ...add more transactions to sum to $2,472,289... -->
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Salary Deposit</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Mar 01, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+                <span style="color:#1db954;">+$120,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Received from Acme Corp</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Mar 10, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+                <span style="color:#1db954;">+$50,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Car Payment</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Mar 15, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$2,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Received from US Treasury</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Apr 01, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+                <span style="color:#1db954;">+$1,800,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Dining Out</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Apr 10, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$350.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Transfer to Investment</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">May 01, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$500,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Received from Mary Lee</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">May 10, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+                <span style="color:#1db954;">+$10,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Medical Bill Payment</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">May 15, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$2,500.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Received from Employer</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Jun 01, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+                <span style="color:#1db954;">+$120,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Sent to Charity</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Jun 10, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#222;">
+                <span style="color:#222;">-$10,000.00</span>
+              </div>
+            </div>
+            <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:1.1em;">Received from Family</div>
+                <div style="font-size:0.95em;color:#888;margin-top:2px;">Jun 18, Checking</div>
+              </div>
+              <div style="font-weight:700;font-size:1.1em;color:#1db954;">
+                <span style="color:#1db954;">+$5,209.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+  <div style="position:absolute; top:40px; right:16px; font-size:10px;"> <a id="view-all-link" href="javascript:void(0)" onclick="showAllTransactions(event)">View All Transaction</a> </div>
+<style>
+  .hidden-transactions { display: none !important; }
+  #hidden-transactions.hidden-transactions { display: none !important; }
+</style>
+<script>
+function showAllTransactions(e) {
+  e.preventDefault();
+  var hidden = document.getElementById('hidden-transactions');
+  var link = document.getElementById('view-all-link');
+  if (hidden.classList.contains('hidden-transactions')) {
+    hidden.classList.remove('hidden-transactions');
+    link.textContent = 'Hide Transaction History';
+  } else {
+    hidden.classList.add('hidden-transactions');
+    link.textContent = 'View Transaction History';
+  }
+}
+window.onload = function() {
+  var hidden = document.getElementById('hidden-transactions');
+  if (hidden) {
+    hidden.classList.add('hidden-transactions');
+  }
+}
+</script>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+</div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+{% comment %}         
+        <div class="col-lg-4">
+          <!-- Recent Activity -->
+          <div class="card">
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+              <div class="activity">
+                <div class="activity-item d-flex">
+                  <div class="activite-label">now</div>
+                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                  <div class="activity-content">
+                    Unrecognised login detected
+                  </div>
+                </div>
+                <div class="activity-item d-flex">
+                  <div class="activite-label">2 hrs</div>
+                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                  <div class="activity-content">
+                    Cannnot Transfer Funds, Account RESTRICTED
+                  </div>
+                </div><!-- End activity item-->
+                <div class="activity-item d-flex">
+                  <div class="activite-label">1 day</div>
+                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                  <div class="activity-content">
+                    Cannnot Transfer Funds, Account RESTRICTED
+                  </div>
+                </div><!-- End activity item-->
+                <div class="activity-item d-flex">
+                  <div class="activite-label">2 days</div>
+                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                  <div class="activity-content">
+                    Cannnot Transfer Funds, Account RESTRICTED.
+                  </div>
+                </div><!-- End activity item-->
+                <div class="activity-item d-flex">
+                  <div class="activite-label">4 weeks</div>
+                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+                  <div class="activity-content">
+                    You have been debited on {{request.user.reg.firstname}} {{request.user.reg.lastname}} (checking account) with a value of -$62,998.00
+                   </div>
+                  </div>
+                </div><!-- End activity item-->
+              </div>
+            </div>
+          </div><!-- End Recent Activity -->
+        </div><!-- End Right side columns -->
+        {% endcomment %}
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  {% endblock content %}
+<script>
+var realBalance = null;
+function toggleBalance() {
+  var balance = document.getElementById('balance-value');
+  var switchInput = document.getElementById('hideBalanceSwitch');
+  if (!realBalance) {
+    realBalance = balance.textContent;
+  }
+  if (switchInput.checked) {
+    balance.textContent = '••••••••';
+  } else {
+    balance.textContent = realBalance;
+  }
+}
+window.onload = function() {
+  var balance = document.getElementById('balance-value');
+  var switchInput = document.getElementById('hideBalanceSwitch');
+  if (balance && switchInput) {
+    realBalance = balance.textContent;
+    if (switchInput.checked) {
+      balance.textContent = '••••••••';
+    }
+  }
+}
+
+function showMobilePinPopup(e) {
+  e.preventDefault();
+  alert('Mobile Security pin is not available, contact support to activate');
+}
+</script>

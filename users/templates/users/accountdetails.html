@@ -1,0 +1,77 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="pagetitle">
+      <h1>Account Details</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">accountdetails</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    
+    <div>
+        <P>Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}} ( Checking Account )</P>
+    </div>
+
+
+    <section class="section">
+        <div class="row">
+          <div class="">
+  
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-title">Balance Enquiry</h3>
+  
+                <!-- Default Table -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Account Number</th>
+                      <th scope="col">Account Name</th>
+                      <th scope="col">Internal Ref</th>
+                      <th scope="col">Account Type</th>
+                      <th scope="col">Account Balance</th>
+                      <th scope="col">Account Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{request.user.reg.account_no}}</th>
+                      <td>{{request.user.reg.firstname}} {{request.user.reg.lastname}} </td>
+                      <td>Designer</td>
+                      <td>28</td>
+                      <td>2016-05-25</td>
+                      <td>2016-05-25</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- End Default Table Example -->
+
+                <div style="display:flex; align-items: center; justify-content: center; padding-top: 30px;">
+                    <div style="flex-basis: 40%">
+                        <img src="https://coastfdplc.icu/user/images/lock.png">
+                    </div>
+
+                    <div style="padding-left:100px">
+                        <h1>Security Alert</h1>
+                        <p>Do not disclose your Internet Banking/Card Details, Secret PIN or Token Codes to anyone.</p>
+
+                           <p>Our staff or agents will never call or send you an email to request Passcode, Secret Pin, Token Codes or Card Details.</p>
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+ 
+      
+  </main><!-- End #main -->
+
+  {% endblock content %}

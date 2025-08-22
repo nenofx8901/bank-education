@@ -1,0 +1,123 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+    <div class="pagetitle">
+      <h1>Bill Pay</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Accordion</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Manage Pay To Account</h5>
+
+              <!-- Default Accordion -->
+              <div class="accordion accordion-flush" id="accordionExample">
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Add a Pay to Account
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div>
+                            <table class="table">
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                        <form class="row g-3">
+                                            <p> Pay to Company </p>
+                                            <div class="col-12">
+                                                <label for="inputNanme4" class="form-label">Company Name</label>
+                                                <input type="text" class="form-control" id="inputNanme4">
+                                                <a href="{% url 'searchpaytolist' %}" style="margin-top:0px; font-size:11px;"> Browsse list of companies </a>
+                                            </div>
+                                            
+                                            
+                                            <div class="text-center">
+                                              <a href="{% url 'paynowc' %}" class="btn btn-primary">Go</a>
+                                            </div>
+                                          </form>
+                                    </td>
+                                    
+                                    <td >
+                                        <h1 style="padding-top: 80px;"> OR </h1>
+                                    </td>
+                            
+                                    <td style="border: 1px solid black;">
+                                        <form class="row g-3">
+                                            <p> Pay to Individual </p>
+                                            <div class="col-md-6">
+                                              <label for="inputEmail5" class="form-label">Email</label>
+                                              <input type="email" class="form-control" id="inputEmail5">
+                                            </div>
+                                            <div class="col-md-6">
+                                              <label for="inputPassword5" class="form-label">Password</label>
+                                              <input type="password" class="form-control" id="inputPassword5">
+                                            </div>
+                                            
+                                            <div class="text-center">
+                                              <a href="{% url 'paynow' %}"  class="btn btn-primary">Go</a>
+                                            </div>
+                                          </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Default Accordion Example -->
+
+              <div style="border: 2px solid whitesmoke">
+                <h6 class="card-title" style="padding:30px;"><a href="{% url 'deletepaytoaccount' %}">Delete a Pay To Account</a></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Make Payment</h5>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td >Merchant:</td>
+                <td style="color:blue;">NICK NAME</td>
+                <td>Pay From</td>
+                <td>Amount</td>
+                <td>Date</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>No Merchant Added.</div>
+          <hr>
+
+          <div style="padding-top:20px;">
+            <a href="" style="background-color: skyblue; color: white; padding: 7px; text-decoration: none; position: absolute; bottom: 8px; right: 12px;">Pay Now</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+  {% endblock content %}

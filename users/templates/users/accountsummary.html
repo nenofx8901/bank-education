@@ -1,0 +1,169 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="pagetitle">
+      <h1>Account Summary</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">accountsummary</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <div>
+        
+        <P>Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}} ( Checking Account )</P>
+    </div>
+
+    {% comment %} <div style="padding: 10px; position: absolute; top: 70px; right: 12px;">
+        <table style="border: 1px solid whitesmoke;">
+          <tr>
+            <th colspan="2" style="background-color: #e2e3e5;">Login History</th>
+          </tr>
+          <tr>
+            <td style="background-color: #eaecf0; padding: 10px; width: 230px;">You have logged in from IP:</td>
+            <td>198.105.218.92</td>
+          </tr>
+          <tr>
+            <td style="background-color:#eaecf0; padding:10px; margin-left: 10px;">You log in at:</td>
+            <td>07:34 PM 05 January 2023</td>
+          </tr>
+        </table>  
+    </div> {% endcomment %}
+
+    <section class="section">
+        <div class="row">
+          <div class="">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Account Summary</h5>
+  
+                <!-- Bordered Tabs -->
+                <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Account Statement</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">User Account Details</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Fund Transfer</button>
+                  </li>
+                </ul>
+                <div class="tab-content pt-2" id="borderedTabContent">
+                  <div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+                  <h3 style="padding-top:30px;"> Account Statement</h3>
+                  <p>View list of all credit/ debit / fund transfer transaction summary by this user.</p>
+
+                    <div>
+                        <form class="row g-3">
+                            <div class="col-auto">
+                               <input type="date" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="From">
+                            </div>
+                            <div class="col-auto">
+                                <h6 style="padding-top:10px;"><b>TO</b></h6>
+                            </div>
+                            <div class="col-auto">
+                              <input type="date" class="form-control" id="" placeholder="To">
+                            </div>
+                            <div class="col-auto">
+                              <button type="submit" class="btn btn-primary mb-3"> filter</button>
+                            </div>
+                          </form>
+                    </div>
+
+                    <div style="padding-top:50px;">
+                        <table style="border-bottom: 1px dashed black;">
+                            <tr >
+                                <td style="background-color: #d7d7d9; width: 650px; padding-left:10px;"><b>Available Credit Balance</b></td>
+                                <td style="background-color: #ededed; width: 300px;">$ {{request.user.reg.account_balance}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <h3 style="padding-top:30px;"> User Account Details</h3>
+                    <p>If you feel that you have a weaker strengh password, then please change it. We recommend that you change your password every 45 days to make it secure</p>
+                    <div style="padding-top:20px;">
+                        <!-- Default Table -->
+            
+              <table class="table" style="width:60%;">
+                <tbody>
+                  <tr>
+                    <th scope="row" class="table-secondary">User Fullname</th>
+                    <td>{{request.user.reg.firstname}} {{request.user.reg.lastname}}</td>
+                  
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-secondary">Email ID</th>
+                    <td>{{request.user.reg.email}}</td>
+                  
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-secondary">Phone Number</th>
+                    <td>{{request.user.reg.phone_no}}</td>
+                  
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-secondary">Address</th>
+                    <td>{{request.user.reg.address}}</td>
+                   
+                  <tr>
+                    <th scope="row" class="table-secondary">City, State</th>
+                    <td>{{request.user.reg.city}}, {{request.user.reg.state}}</td>
+                   
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-secondary">Zip Code</th>
+                    <td>{{request.user.reg.zipcode}}</td>
+                    
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-secondary">Account Number</th>
+                    <td>{{request.user.reg.account_no}}</td>
+                  
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-secondary">Account Balance</th>
+                    <td>${{request.user.reg.account_balance}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-secondary">Account PIN Code</th>
+                    <td>{{request.user.reg.account_pin}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <!-- End Default Table Example -->
+                    </div>
+
+
+
+                </div>
+                  <div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+                  
+                    <div style="padding-top:50px;">
+                        <table style="border-bottom: 1px dashed black;">
+                            <tr >
+                                <td style="background-color: #d7d7d9; width: 650px; padding-left:10px;"><b>Available Credit Balance</b></td>
+                                <td style="background-color: #ededed; width: 300px;">$ {{request.user.reg.account_balance}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                </div><!-- End Bordered Tabs -->
+  
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section>
+
+  </main><!-- End #main -->
+  
+  {% endblock content %}

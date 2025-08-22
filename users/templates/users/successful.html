@@ -1,0 +1,58 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <div class="pagetitle">
+      <h1>Transfer Successful</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'transfer' %}">Transfer Funds</a></li>
+          <li class="breadcrumb-item active">Success</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="transfer-content" style="display:flex;justify-content:center;align-items:center;min-height:60vh;">
+      <div class="card" style="max-width:480px;width:100%;margin:auto;box-shadow:0 2px 16px rgba(0,0,0,0.08);border-radius:18px;overflow:hidden;">
+        <div class="card-body" style="padding:32px 28px;">
+          <div class="success-icon" style="font-size:3em;color:#28a745;text-align:center;">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2 style="text-align:center;margin-top:12px;">Transfer Successful</h2>
+          <p class="success-note" style="text-align:center;font-size:1.1em;margin-bottom:18px;">
+            {% if amount %}
+              Your ${{ amount|stringformat:"d" }} transfer to <strong>{{ account_name }}</strong>{% if bank_name %} at <strong>{{ bank_name }}</strong>{% endif %} has been completed.
+            {% else %}
+              Transfer to <strong>{{ account_name }}</strong>{% if bank_name %} at <strong>{{ bank_name }}</strong>{% endif %} has been completed.
+            {% endif %}
+          </p>
+          <div class="ref-details" style="background:#f8f9fa;padding:12px 18px;border-radius:8px;margin-bottom:18px;">
+            <p style="margin-bottom:4px;"><strong>Reference:</strong> {{ reference }}</p>
+            <p style="margin-bottom:0;"><strong>Date:</strong> {{ date }}</p>
+          </div>
+          <div id="receipt" class="receipt" style="background:#f8f9fa;padding:18px 18px;border-radius:8px;">
+            <h3 style="font-size:1.1em;margin-bottom:10px;">Transaction Receipt</h3>
+            <ul style="list-style:none;padding-left:0;">
+              <li><strong>Date:</strong> {{ date }}</li>
+              <li><strong>From:</strong> Barclays Bank</li>
+              <li><strong>To:</strong> {% if bank_name %}{{ bank_name }}{% else %}{{ account_number }}{% endif %}</li>
+              <li><strong>Account No.:</strong> {{ account_number }}</li>
+              <li><strong>Amount:</strong> {% if amount %}${{ amount|stringformat:"d" }}{% else %}N/A{% endif %}</li>
+              <li><strong>Reference:</strong> {{ reference }}</li>
+              <li><strong>Description:</strong> {{ description }}</li>
+            </ul>
+          </div>
+          <div class="button-group" style="margin-top:24px;display:flex;gap:12px;justify-content:center;">
+            <a class="btn btn-secondary" href="{% url 'dashboard' %}">Go to Dashboard</a>
+            <a class="btn btn-secondary" href="{% url 'transfer' %}">Make Another Transfer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main><!-- End #main -->
+
+  {% endblock content %}

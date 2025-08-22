@@ -1,0 +1,46 @@
+{% extends 'webpage/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+  
+	<div class="hero overlay inner-page">
+
+         <div data-aos="fade-up">
+        <img src="{% static 'images/ContentImageHandler.ashx-54.jpg' %}" alt="Image">
+    </div>
+		<div class="container" style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
+			<div class="row align-items-center justify-content-center pt-5" >
+				<div class="col-lg-6 text-center pe-lg-5" >
+					<h1 class="heading text-white mb-3" data-aos="fade-up" >Resources</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+   
+    <div style="padding:20px;"></div>
+    <div class="container">
+        
+        <ul>
+            <li><a href="{% url '404' %}">Safe Deposit Box Insurance Company</a></li>
+            <li><a href="{% url '404' %}">MoneyPass ATM Locator</a></li>
+            <li><a href="{% url '404' %}">Comptroller of the Currency</a></li>
+            <li><a href="{% url '404' %}">Federal Reserve Bank of Chicago</a></li>
+            <li><a href="{% url '404' %}">Internal Revenue Service</a></li>
+            <li><a href="{% url '404' %}">Federal Deposit Insurance Corporation</a></li>
+            <li><a href="{% url '404' %}">United States Mint</a></li>
+            <li><a href="{% url '404' %}">United States Treasury Department</a></li>
+            <li><a href="{% url '404' %}">Making Home Affordable Program</a></li>
+        </ul>
+
+
+        <div style="padding:10px;"></div>
+  </div>
+
+
+{% endblock content %}

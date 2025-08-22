@@ -1,0 +1,55 @@
+{% extends 'webpage/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+  
+	<div class="hero overlay inner-page">
+
+        <div data-aos="fade-up">
+        <img src="{% static 'images/ContentImageHandler.ashx-27.jpg' %}" alt="Image">
+    </div>
+		<div class="container" style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
+			<div class="row align-items-center justify-content-center pt-5">
+				<div class="col-lg-6 text-center pe-lg-5">
+					<h1 class="heading text-white mb-3" data-aos="fade-up">Business Savings</h1>
+                    <div class="align-items-center mb-4" data-aos="fade-up" data-aos-delay="200">
+						<a href="{% url 'rates' %}" class="btn btn-outline-white-reverse me-4">See Rates</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    
+    <div style="padding:20px;"></div>
+    <div class="container">
+
+        <p>At CFD, we understand the importance of building a strong personal relationship with our business customers. Our experienced staff will give you professional advice to assist you in making the right account choices to suit your financial needs.</p>
+
+
+        <h2 class="heading text-primary">Business Statement Savings</h2>
+        <p>This is a great way to save your hard earned business dollars and increase your business potential. Earn interest on daily minimum ledger balances of $1,000 or more.</p>
+    
+
+        <div> <p style="font-weight:bold;">The minimum opening deposit for this account is $1,000.00.</p></div>
+        <div style="padding:10px;"></div>
+
+        <p style="font-weight:bold;">Charges</p>
+        <p>A monthly maintenance fee of $10.00 will be assessed if a Calendar Month's Average Ledger balance is under $1,000.00.</p>
+           <p> You may make three (3) teller assisted withdrawals each calendar month; each subsequent withdrawal is $5.00.</p>
+
+        
+        <p>
+            <a>See disclosure for details.</a>
+        </p>
+       <i>If you close your account within six (6) months from the opening date, an Early Closing fee of $10.00 will be assessed.</i>
+  </div>
+  <div style="padding:20px;"></div>
+
+
+{% endblock content %}

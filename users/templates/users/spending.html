@@ -1,0 +1,145 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% load humanize %}
+{# removed json_script, not available in Django 4.2.5 #}
+{% block content %}
+<div class="content">
+  <div class="spending-header">
+    <h2>Spending Summary</h2>
+    <div class="spending-filter">
+      <select>
+        <option>This Month</option>
+        <option>This Week</option>
+        <option>This Year</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="spending-summary">
+    <div class="spending-chart">
+      <canvas id="spendingChart"></canvas>
+    </div>
+
+    <ul class="category-list">
+      <li>
+        <div class="category-label">
+          <i class="fas fa-utensils"></i>
+          <span>Food & Dining</span>
+        </div>
+        <div class="category-amount">$450.00</div>
+      </li>
+      <li>
+        <div class="category-label">
+          <i class="fas fa-car"></i>
+          <span>Transport</span>
+        </div>
+        <div class="category-amount">$220.00</div>
+      </li>
+      <li>
+        <div class="category-label">
+          <i class="fas fa-bolt"></i>
+          <span>Utilities</span>
+        </div>
+        <div class="category-amount">$120.00</div>
+      </li>
+      <li>
+        <div class="category-label">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Shopping</span>
+        </div>
+        <div class="category-amount">$180.00</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  .spending-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .spending-header h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+  .spending-filter select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  .spending-summary {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .spending-chart {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 20px;
+  }
+  .category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .category-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .category-list li:last-child {
+    border-bottom: none;
+  }
+  .category-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .category-label i {
+    color: var(--primary);
+    font-size: 18px;
+  }
+  .category-label span {
+    font-size: 15px;
+    color: #333;
+  }
+  .category-amount {
+    font-weight: bold;
+    font-size: 15px;
+    color: #272727;
+  }
+</style>
+<script>
+  // Chart.js config
+  const ctx = document.getElementById('spendingChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Food', 'Transport', 'Utilities', 'Shopping'],
+      datasets: [{
+        data: [450, 220, 120, 180],
+        backgroundColor: ['#00aeef', '#5bc0de', '#f0ad4e', '#d9534f'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

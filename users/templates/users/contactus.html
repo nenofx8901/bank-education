@@ -1,0 +1,68 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <div class="pagetitle">
+      <h1>Contact Us</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">User</a></li>
+          <li class="breadcrumb-item active">contact us</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    
+    
+    <section class="section">
+        <div class="row">
+          <div class="">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Contact Us</h5>
+                <P>If you have any query, complaint or suggestios, feel free to contact us. We will try our best to get in contact with you as soon as possible.</p>
+                <!-- General Form Elements -->
+              <form>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Subject</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Reason</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+              
+
+                <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Message</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" style="height: 100px"></textarea>
+                    </div>
+                  </div>
+
+               
+                  <div class="" style="text-align:center;">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+</section>
+
+      
+  </main><!-- End #main -->
+  
+  {% endblock content %}

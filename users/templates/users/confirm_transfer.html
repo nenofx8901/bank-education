@@ -1,0 +1,78 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="pagetitle">
+      <h1>Confirm Transfer</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'transfer' %}">Transfer Funds</a></li>
+          <li class="breadcrumb-item active">Confirm</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="card info-card revenue-card">
+      <div class="card-body">
+        <h5 class="card-title">Confirm Transfer Details</h5>
+        <form method="post" style="display:flex;flex-direction:column;gap:16px;max-width:400px;margin:auto;">
+          {% csrf_token %}
+          <ul class="details-list" style="margin-bottom:16px;">
+            <li><strong>From:</strong> {{ from_account|default:"Checking Account" }}</li>
+            <li><strong>To:</strong> {{ bank_name|default:to_account_type }}</li>
+            <li><strong>Account Number:</strong> {{ account_number|default:"-" }}</li>
+            <li><strong>Account Name:</strong> {{ account_name|default:"-" }}</li>
+            <li><strong>Amount:</strong> ${{ amount|default:"-" }}</li>
+            <li><strong>Description:</strong> {{ description|default:"-" }}</li>
+          </ul>
+
+          <div class="pin-entry">
+            <label for="pin1">Enter 4-digit PIN to confirm:</label>
+            <div class="pin-fields" style="display:flex;gap:8px;">
+              <input type="password" name="pin1" id="pin1" maxlength="1" pattern="\d" required style="width:2em;text-align:center;" />
+              <input type="password" name="pin2" id="pin2" maxlength="1" pattern="\d" required style="width:2em;text-align:center;" />
+              <input type="password" name="pin3" id="pin3" maxlength="1" pattern="\d" required style="width:2em;text-align:center;" />
+              <input type="password" name="pin4" id="pin4" maxlength="1" pattern="\d" required style="width:2em;text-align:center;" />
+            </div>
+          </div>
+          <script>
+            // Auto-focus next PIN field
+            const pinFields = [
+              document.getElementById('pin1'),
+              document.getElementById('pin2'),
+              document.getElementById('pin3'),
+              document.getElementById('pin4')
+            ];
+            pinFields.forEach((field, idx) => {
+              field.addEventListener('input', function() {
+                if (this.value.length === 1 && idx < pinFields.length - 1) {
+                  pinFields[idx + 1].focus();
+                }
+              });
+              field.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value === '' && idx > 0) {
+                  pinFields[idx - 1].focus();
+                }
+              });
+            });
+          </script>
+
+          <input type="hidden" name="from_account" value="{{ from_account }}" />
+          <input type="hidden" name="to_account_type" value="{{ to_account_type }}" />
+          <input type="hidden" name="bank_name" value="{{ bank_name }}" />
+          <input type="hidden" name="account_number" value="{{ account_number }}" />
+          <input type="hidden" name="account_name" value="{{ account_name }}" />
+          <input type="hidden" name="amount" value="{{ amount }}" />
+          <input type="hidden" name="description" value="{{ description }}" />
+          <div class="button-group" style="margin-top:16px;display:flex;gap:8px;">
+            <a class="btn btn-secondary" href="{% url 'transfer' %}">Cancel</a>
+            <button class="btn btn-success" type="submit">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main><!-- End #main -->
+
+{% endblock content %}

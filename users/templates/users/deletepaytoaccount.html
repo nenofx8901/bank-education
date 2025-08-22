@@ -1,0 +1,56 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="pagetitle">
+      <h1>Bill Pay</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">User</a></li>
+          <li class="breadcrumb-item">Billpay</li>
+          <li class="breadcrumb-item active">deletebillpayaccount</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+
+    <section class="section">
+      <div class="row">
+        <div class="">
+
+
+          <div class="card">
+            <div class="card-body">
+              {% comment %} <h5 class="card-title">Table with stripped rows</h5> {% endcomment %}
+                <div style="padding-bottom:20px"></div>
+              <!-- Table with stripped rows -->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Merchant Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">State</th>
+                    <th scope="col">City</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>No Merchant Added.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  {% endblock content %}
+
+  

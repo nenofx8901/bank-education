@@ -1,0 +1,117 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="pagetitle">
+      <h1>Transfer Funds</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Transfer Funds</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="card info-card revenue-card">
+      <div class="card-body">
+        <h5 class="card-title">Send to Bank Account</h5>
+        <div style="margin-bottom:18px; color:#444; font-size:0.98em;">
+          <ul style="padding-left:18px;">
+            <li>Fill in the details below to transfer funds from your Checking account to another bank or Barclays account.</li>
+          </ul>
+        </div>
+        <form method="post" id="transferForm" style="display:flex;flex-direction:column;gap:16px;max-width:400px;margin:auto;">
+          {% csrf_token %}
+          <label style="font-weight:500;">From Account</label>
+          <select name="from_account" class="form-control">
+            <option value="checking">Checking - ({{ request.user.reg.account_no}})</option>
+          </select>
+
+          <label style="font-weight:500;">To Bank</label>
+          <div style="position:relative;">
+            <select name="to_account_type" id="toAccountSelect" class="form-control" style="appearance:none; padding-right:32px;">
+              <option value="savings">Barclays Account</option>
+              <option value="other">Other Bank</option>
+            </select>
+            <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); pointer-events:none; font-size:1.2em; color:#888;">
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </div>
+
+          <!-- Bank Name only visible for Other Bank, directly under To Bank -->
+          <div id="otherBankFields" style="display:none; flex-direction:column; gap:8px;">
+            <label style="font-weight:500;">Bank Name</label>
+            <input type="text" name="bank_name" class="form-control" placeholder="e.g. Truist, ChaseBank..." />
+          </div>
+
+          <!-- Account Number and Name always visible -->
+          <label style="font-weight:500;">Account Number</label>
+          <input type="text" name="account_number" class="form-control" placeholder="10-digit account number" maxlength="10" />
+
+          <label style="font-weight:500;">Account Name</label>
+          <input type="text" name="account_name" class="form-control" placeholder="John Doe" />
+
+          <label style="font-weight:500;">Amount</label>
+          <div style="position:relative;">
+            <input type="text" name="amount" id="amountInput" class="form-control" placeholder="$0.00" inputmode="numeric" />
+          </div>
+          <div id="amountError" style="color:red; font-size:0.98em; display:none; margin-top:-10px; margin-bottom:8px;"></div>
+
+          <label style="font-weight:500;">Description (optional)</label>
+          <input type="text" name="description" class="form-control" placeholder="e.g. Rent, Groceries" />
+
+          <button type="submit" class="btn btn-success" style="margin-top:16px;">Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const toSelect = document.getElementById("toAccountSelect");
+      const otherFields = document.getElementById("otherBankFields");
+      toSelect.addEventListener("change", () => {
+        if (toSelect.value === "other") {
+          otherFields.style.display = "flex";
+        } else {
+          otherFields.style.display = "none";
+        }
+      });
+
+      // Format amount input with $ and comma
+      const amountInput = document.getElementById("amountInput");
+      amountInput.addEventListener("input", function(e) {
+        let value = amountInput.value.replace(/[^0-9]/g, "");
+        if (value) {
+          value = parseInt(value, 10).toLocaleString();
+          amountInput.value = value;
+        } else {
+          amountInput.value = "";
+        }
+      });
+
+      // Prevent form submit if amount > balance
+      const transferForm = document.getElementById("transferForm");
+      const amountError = document.getElementById("amountError");
+      transferForm.addEventListener("submit", function(e) {
+        const balance = {{ request.user.reg.account_balance|default:0 }};
+        let rawAmount = amountInput.value.replace(/,/g, '').replace('$', '').trim();
+        let amount = parseInt(rawAmount, 10);
+        if (isNaN(amount) || amount <= 0) {
+          amountError.textContent = "Please enter a valid amount.";
+          amountError.style.display = "block";
+          e.preventDefault();
+          return;
+        }
+        if (amount > balance) {
+          amountError.textContent = "Insufficient funds: You cannot transfer more than your available balance ($" + balance.toLocaleString() + ").";
+          amountError.style.display = "block";
+          e.preventDefault();
+        } else {
+          amountError.style.display = "none";
+        }
+      });
+    </script>
+
+  </main><!-- End #main -->
+
+{% endblock content %}

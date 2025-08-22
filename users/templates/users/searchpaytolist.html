@@ -1,0 +1,95 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="pagetitle">
+      <h1>Search Bill Pay</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">user</a></li>
+          <li class="breadcrumb-item">billpaycenter</li>
+          <li class="breadcrumb-item active">searchpaytolist</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="">
+
+          <div class="card" style="height:445px;">
+            <div class="card-body">
+              <h5 class="card-title">Search Pay To List</h5>
+
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">By Category</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">By Name</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Search</button>
+                </li>
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                 <h6 style="font-weight:bold; padding-top:25px;"> Browse by Category </h6>
+
+                 <div style="position: absolute; top: 150px; right: 40px; width: 320px; border: 2px solid whitesmoke;">
+                    <p style="padding: 20px;">
+                      <b>Pay anyone.</b> Can't find the company or person you want To Pay? <a href="" > Add your own Pay To account </a> in few simple steps.
+                    </p>
+                    
+                  </div>
+
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h6 style="font-weight:bold; padding-top:25px;"> Browse by first letter of merchant name </h6>
+
+                        <p style="padding-left:20px;">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</P> 
+
+                        <h6> Search Results for <a href="">A</a> </h6>
+       
+                        <div style="position: absolute; top: 150px; right: 40px; width: 320px; border: 2px solid whitesmoke;">
+                           <p style="padding: 20px;">
+                             <b>Pay anyone.</b> Can't find the company or person you want To Pay? <a href="" > Add your own Pay To account </a> in few simple steps.
+                           </p>
+                           
+                         </div>
+       
+                       </div>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+                    <form class="row g-3" style="padding-top:25px;">
+                        <div class="col-md-6">
+                            <label for="inputEmail5" class="form-label">Search By Company Name :</label>
+                            <input type="text" class="form-control" id="inputEmail5">
+                          </div>
+                    </form>
+
+                 <div style="position: absolute; top: 150px; right: 40px; width: 320px; border: 2px solid whitesmoke;">
+                    <p style="padding: 20px;">
+                      <b>Pay anyone.</b> Can't find the company or person you want To Pay? <a href="" > Add your own Pay To account </a> in few simple steps.
+                    </p>
+                    
+                  </div>
+
+                </div>
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  {% endblock content %}

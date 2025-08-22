@@ -1,0 +1,123 @@
+{% extends 'webpage/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+  
+	<div class="hero overlay inner-page">
+    <div data-aos="fade-up">
+            <img src="{% static 'images/ContentImageHandler.ashx-22.jpg' %}" alt="Image">
+          </div>
+
+		<div class="container" style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
+			<div class="row align-items-center justify-content-center pt-5">
+				<div class="col-lg-6 text-center pe-lg-5">
+					<h1 class="heading text-white mb-3" data-aos="fade-up">Savings</h1>
+					<div class="align-items-center mb-4" data-aos="fade-up" data-aos-delay="200">
+						<a href="{% url 'rates' %}" class="btn btn-outline-white-reverse me-4">See Rates</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+    <div style="padding-top:40px; padding-left:20px">
+        <p>From young savers to college students to senior citizens, CFD offers a wide variety of accounts to meet the diversified personal needs of our community.</p>
+    </div>
+
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              
+        Personal Statement Savings
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+
+                <p>Have the added convenience of ATM access and a monthly statement with low balance requirements.</p>
+                <div>
+
+                    <ul>
+                        <li>Minimum opening deposit - $500.00    </li>
+                        <li>Monthly maintenance fee - $2.50 if calendar month's average daily ledger balance is less than $500.00 </li>
+                        <li>First 2 teller assisted withdrawals each calendar month are free. Each subsequent teller assisted withdrawal is $1.00 </li>
+                        <li>ATM access (A.C.H. and P.O.S. Debit Transactions are not allowed for the this account)</li>
+                        <li>If you close your account within six (6) months from the opening date, an Early Closing fee of $10.00 will be assessed.</li>
+                        <a href="">See disclosure for details.</a>
+                    </ul>
+
+                    
+                </div>
+
+                
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            Senior Statement Savings
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <p>In addition to the conveniences of our regular statement savings, senior citizens age 55 or older can make unlimited withdrawals at a teller window for no charge.</p>
+                <div>
+
+                    <ul>
+                        <li>Minimum opening deposit - $500.00    </li>
+                        <li>Monthly maintenance fee - $2.50 if calendar month's average daily ledger balance is less than $500.00 </li>
+                        <li>ATM access (A.C.H. and P.O.S. Debit Transactions are not allowed for the this account)</li>
+                        <li>If you close your account within six (6) months from the opening date, an Early Closing fee of $10.00 will be assessed.</li>
+                        <a href="">See disclosure for details.</a>
+                    </ul>
+
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                Young Savers Statement Savings
+            </button>
+          </h2>
+          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+
+                <p style="font-weight:bold;">It's never too early to learn the importance of saving money.</p>
+				<p>Young savers under the age of 18 (who are able to sign their name) can experience the excitement of watching their own money grow. All that is required is a $1.00 opening deposit and the additional signature of a parent or guardian. </p>
+                <div>
+
+                    <ul>
+                        <li>No monthly maintenance fees     </li>
+                        <li>Daily minimum ledger balance required to earn interest - one cent</li>
+                        <li>ATM access (A.C.H. and P.O.S. Debit Transactions are not allowed for the this account)</li>
+                        <li>If you close your account within six (6) months from the opening date, an Early Closing fee of $10.00 will be assessed.</li>
+                        <a href="">See disclosure for details.</a>
+                    </ul>
+
+                    
+                </div>
+				
+
+			</div>
+        </div>
+      </div>
+
+
+	 
+
+			
+</div>
+
+{% endblock content %}

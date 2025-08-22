@@ -1,0 +1,67 @@
+{% extends 'webpage/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+  
+	<div class="hero overlay inner-page">
+
+		<div data-aos="fade-up">
+        <img src="{% static 'images/ContentImageHandler.ashx-22.jpg' %}" alt="Image">
+    </div>
+
+		<div class="container" style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);">
+			<div class="row align-items-center justify-content-center pt-5">
+				<div class="col-lg-6 text-center pe-lg-5">
+					<h1 class="heading text-white mb-3" data-aos="fade-up">Health Savings</h1>
+					<div class="align-items-center mb-4" data-aos="fade-up" data-aos-delay="50">
+						<a href="{% url 'rates' %}" class="btn btn-outline-white-reverse me-4">See Rates</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    
+	<div style="padding:20px"></div>
+    <div class="container">
+        <h2> Health Savings Account </h2>
+        <p style="font-weight:bold;">Earn interest on your HSA account with a Daily Minimum Ledger Balance of $100.00. Pay no monthly maintenance fee and no fee for up to 30 checks paid with a Monthly Statement Minimum Ledger Balance of $100.00 or more.</p>
+        <div>
+
+            <ul>
+                <li>Minimum opening deposit - $100.00    </li>
+                <li>Monthly maintenance fee - $3.00 if Monthly Statement Minimum Ledger Balance is less than $100.00 and a Check Paid Fee of $.25 cents will be deducted for each check that appears as paid on your monthly statement</li>
+                <li>If your Monthly Statement Minimum Ledger Balance is $100.00 or more and the number of check paid is 31 or more, a Check Paid Fee of $.25 cents will be deducted for each check paid that exceeds 30 checks paid</li>
+                
+                <a href="">See disclosure for details.</a>
+            </ul>
+
+            
+        </div>
+
+        <div >
+					
+            <a href="http://www.onlinebanktours.com/external/v5/player.php?key=f8a4ef6c01ed992a2438bb7f6a579e4ed87cb783&loop=true" class="text-white glightbox">
+                <img src="{% static 'images/195072.png' %}" class="img-fluid rounded
+                ">
+            </a>
+        </div>
+
+
+
+
+  </div>
+
+	
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
