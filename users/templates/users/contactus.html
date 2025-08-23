@@ -8,7 +8,7 @@
       <h1>Contact Us</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">User</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{{ request.user }}</a></li>
           <li class="breadcrumb-item active">contact us</li>
         </ol>
       </nav>
@@ -22,7 +22,8 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Contact Us</h5>
-                <P>If you have any query, complaint or suggestios, feel free to contact us. We will try our best to get in contact with you as soon as possible.</p>
+                <P>If you have any query, complaint or suggestions, feel free to contact us. We will try our best to get in contact with you as soon as possible.</p>
+                <a href="https://wa.me/12256780173" target="_blank" class="btn btn-success mb-3">Contact Support on WhatsApp</a>
                 <!-- General Form Elements -->
               <form>
                 <div class="row mb-3">

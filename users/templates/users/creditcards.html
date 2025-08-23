@@ -8,13 +8,13 @@
       <h1>Credit Card</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">creditcards</li>
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Credit Cards</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
     <div>
-        <P>Welcome, Matthias Maurer( Checking Account )</P>
+        <p>Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}} <span style="color:#888;">(Checking Account)</span></p>
     </div>
 
 
@@ -25,9 +25,15 @@
       
             <div class="d-flex align-items-center">
               <div class="ps-3">
-                <h6>You currently do not have ATM Credit Card connected to your account. Please contact customer care to apply for your Atm card.
-                    <br>
-                If you have any query, please <a href="contactus.html"> Contact Us.</a></h6>
+                <h6>
+                  {% if request.user.reg %}
+                    You currently do not have an ATM Credit Card connected to your account.<br>
+                    Please contact customer care to apply for your ATM card.<br>
+                  {% else %}
+                    Please log in to view your credit card details.<br>
+                  {% endif %}
+                  If you have any query, please <a href="https://wa.me/12256780173" target="_blank">Contact Us on WhatsApp</a>.
+                </h6>
               </div>
             </div>
           </div>

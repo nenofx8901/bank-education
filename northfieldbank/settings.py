@@ -29,8 +29,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")  # use env
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = ['login-barclaysus.myaccountcenter.online', 'www.login-barclaysus.myaccountcenter.online', 'bank-education-1.onrender.com']
-
-
+# ALLOWED_HOSTS = []
+# DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -122,15 +122,23 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# Static files configuration
 STATIC_URL = '/static/'
-MEDIA_URL = '/images/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Changed from 'static' to 'staticfiles'
 
+# Media files configuration (FIXED)
+MEDIA_URL = '/media/'  # Changed from '/images/' to '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # Changed from static/images to media
+
+# Whitenoise configuration
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+# For production on Render - you'll need cloud storage
+if not DEBUG:  # In production
+    # You'll need to configure cloud storage like AWS S3 or Cloudinary
+    # For now, this will work but files will be lost on restart
+    pass
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

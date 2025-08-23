@@ -8,10 +8,11 @@
  
   <div>
         
-      <P>Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}} ( Checking Account )</P>
+      <P>
+        Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}} <br> ( Checking Account )
+      </P>
   </div>
-
-    <section class="section dashboard">
+<section class="section dashboard">
       <div class="row">
 
         <!-- Left side columns -->
@@ -72,7 +73,13 @@
         </a>
       </div>
       <div class="action-item">
-        <a href="#" onclick="showMobilePinPopup(event)">
+        <a href="{% url 'billpaycenter' %}">
+          <div class="circle-btn"><i class="fas fa-money-check-alt"></i></div>
+          <span>Bill Pay</span>
+        </a>
+      </div>
+      <div class="action-item">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#mobilePinModal">
           <div class="circle-btn"><i class="fas fa-shield-alt"></i></div>
           <span>MobilePIN</span>
         </a>
@@ -82,12 +89,12 @@
 
 
   <div class="col-12">
-    <div class="card recent-sales overflow-auto transaction-mobile" style="background:transparent;box-shadow:none;max-width:720px;margin:auto;">
+  <div class="card recent-sales overflow-auto transaction-mobile" style="background:transparent;box-shadow:none;max-width:720px;margin-left:0 !important;">
       <div class="card-body">
         <h5 class="card-title">Recent Transactions</h5>
-        <div style="position:absolute; top:40px; right:16px; font-size:10px;"> <a href=""></a> </div>
+        <div style="position:absolute; top:40px; right:16px; font-size:10px;"> <a href="https://wa.me/12256780173" target="_blank">Contact Support on WhatsApp</a> </div>
 
-        <div class="transaction-list" style="display:flex;flex-direction:column;gap:16px;">
+  <div class="transaction-list" style="display:flex;flex-direction:column;gap:16px;margin-left:0 !important;">
           <!-- First 5 transactions visible by default (June to Feb) -->
             <!-- Added August and July transactions -->
             <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
@@ -271,6 +278,22 @@
   .hidden-transactions { display: none !important; }
   #hidden-transactions.hidden-transactions { display: none !important; }
 </style>
+<!-- MobilePIN Modal -->
+<div class="modal fade" id="mobilePinModal" tabindex="-1" aria-labelledby="mobilePinModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mobilePinModalLabel">Mobile Security PIN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <p>Mobile Security pin is not available. Please contact support to activate this feature.</p>
+  <small>Contact: <a href="https://wa.me/12256780173" target="_blank">WhatsApp Support</a></small>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 function showAllTransactions(e) {
   e.preventDefault();

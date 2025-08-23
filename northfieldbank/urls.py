@@ -27,4 +27,11 @@ urlpatterns = [
     path('users/', include('users.urls')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+# Serve media files in development and production
+# This is important - it was missing the proper condition
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+else:
+    # For production, you still need this for now
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

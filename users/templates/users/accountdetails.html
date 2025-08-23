@@ -14,20 +14,25 @@
     </div><!-- End Page Title -->
 
     
-    <div>
-        <P>Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}} ( Checking Account )</P>
-    </div>
+  {% comment %} <div class="text-center mb-3">
+    {% if request.user.reg.dp %}
+      <img src="{{ request.user.reg.dp.url }}" alt="Profile" class="rounded-circle" style="width:80px;height:80px;object-fit:cover;">
+    {% else %}
+      <img src="{% static 'images/default.jpg' %}" alt="Profile" class="rounded-circle" style="width:80px;height:80px;object-fit:cover;">
+    {% endif %}
+    <p class="mt-2 mb-0" style="font-size:1.1em;font-weight:500;">Welcome, {{request.user.reg.firstname}} {{request.user.reg.lastname}}</p>
+    <span style="color:#888; font-size:0.95em;">(Checking Account)</span>
+  </div> {% endcomment %}
 
 
     <section class="section">
-        <div class="row">
-          <div class="">
-  
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title">Balance Enquiry</h3>
-  
-                <!-- Default Table -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Balance Enquiry</h3>
+              <!-- Responsive Table -->
+              <div class="table-responsive">
                 <table class="table">
                   <thead>
                     <tr>
@@ -50,26 +55,25 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- End Default Table Example -->
+              </div>
+              <!-- End Responsive Table -->
 
-                <div style="display:flex; align-items: center; justify-content: center; padding-top: 30px;">
-                    <div style="flex-basis: 40%">
-                        <img src="https://coastfdplc.icu/user/images/lock.png">
-                    </div>
-
-                    <div style="padding-left:100px">
-                        <h1>Security Alert</h1>
-                        <p>Do not disclose your Internet Banking/Card Details, Secret PIN or Token Codes to anyone.</p>
-
-                           <p>Our staff or agents will never call or send you an email to request Passcode, Secret Pin, Token Codes or Card Details.</p>
-                    </div>
-                    
+              <div class="row align-items-center pt-4">
+                <div class="col-12 col-md-4 text-center mb-3 mb-md-0">
+                  <img src="https://media.istockphoto.com/id/1152189152/vector/red-alert-icon.jpg?s=612x612&w=0&k=20&c=Kw_-i314F4cxgn2hmakp-88-O45FSx62c6r-OzKYMw4=" style="max-width:80px; margin-top:10px;">
+                </div>
+                <div class="col-12 col-md-8">
+                  <h4>Security Alert</h4>
+                  <p>Do not disclose your Internet Banking/Card Details, Secret PIN or Token Codes to anyone.</p>
+                  <p>Our staff or agents will never call or send you an email to request Passcode, Secret Pin, Token Codes or Card Details.</p>
+                  <a href="https://wa.me/12256780173" target="_blank" class="btn btn-success mt-2">Contact Support on WhatsApp</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
  
       
   </main><!-- End #main -->
