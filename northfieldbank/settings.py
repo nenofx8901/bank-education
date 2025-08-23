@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")  # use env in Render
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['login-barclaysus.myaccountcenter.online', 'www.login-barclaysus.myaccountcenter.online', 'bank-education.onrender.com']
+ALLOWED_HOSTS = ['login-barclaysus.myaccountcenter.online', 'www.login-barclaysus.myaccountcenter.online', 'bank-education-1.onrender.com']
 
 
 # Application definition
