@@ -18,15 +18,13 @@ def logoutUser(request):
 
 @login_required(login_url='home')
 def dashboard(request):
-
     transfer = Transfer.objects.filter(user=request.user)
-    history = History.objects.all()
+    history = History.objects.all().order_by('-date')  # Most recent first
     context = {
-        'transfer':transfer,
-        'history':history,
+        'transfer': transfer,
+        'history': history,
     }
-   
-    return render(request, "users/dashboard.html",context)
+    return render(request, "users/dashboard.html", context)
 
 
 @login_required(login_url='home')
