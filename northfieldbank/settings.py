@@ -26,12 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")  # use env in Render
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-
+# DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = True
 ALLOWED_HOSTS = ['login-barclaysus.myaccountcenter.online', 'www.login-barclaysus.myaccountcenter.online', 'bank-education-1.onrender.com', 'localhost', '127.0.0.1']
 # ALLOWED_HOSTS = []
-# DEBUG = True
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
