@@ -26,10 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")  # use env in Render
-# DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+# DEBUG = True
 ALLOWED_HOSTS = ['login-barclaysus.myaccountcenter.online', 'www.login-barclaysus.myaccountcenter.online', 'bank-education-1.onrender.com', 'localhost', '127.0.0.1']
-# ALLOWED_HOSTS = []
+
+
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -120,23 +122,15 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# Static files configuration
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Changed from 'static' to 'staticfiles'
+MEDIA_URL = '/images/'
+STATIC_ROOT = BASE_DIR / 'static'
 
-# Media files configuration (FIXED)
-MEDIA_URL = '/media/'  # Changed from '/images/' to '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'  # Changed from static/images to media
-
-# Whitenoise configuration
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-# For production on Render - you'll need cloud storage
-if not DEBUG:  # In production
-    # You'll need to configure cloud storage like AWS S3 or Cloudinary
-    # For now, this will work but files will be lost on restart
-    pass
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
