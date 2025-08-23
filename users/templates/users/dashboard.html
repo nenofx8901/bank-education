@@ -88,22 +88,7 @@
         <div style="position:absolute; top:40px; right:16px; font-size:10px;"> <a href=""></a> </div>
 
         <div class="transaction-list" style="display:flex;flex-direction:column;gap:16px;">
-          {% for historys in history %}
-          <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <div style="font-weight:700;font-size:1.1em;">{{ historys.description }}</div>
-              <div style="font-size:0.95em;color:#888;margin-top:2px;">{{ historys.date|date:"M d" }}, Checking</div>
-            </div>
-            <div style="font-weight:700;font-size:1.1em;{% if historys.amount > 0 %}color:#1db954;{% else %}color:#222;{% endif %}">
-              {% if historys.amount > 0 %}
-                <span style="color:#1db954;">+${{ historys.amount|floatformat:2|intcomma }}</span>
-              {% else %}
-                <span style="color:#222;">-${% if historys.amount < 0 %}{{ historys.amount|floatformat:2|intcomma|slice:'1:' }}{% else %}{{ historys.amount|floatformat:2|intcomma }}{% endif %}</span>
-              {% endif %}
-            </div>
-          </div>
-          {% endfor %}
-          <!-- First 5 transactions visible by default -->
+          <!-- First 5 transactions visible by default (June to Feb) -->
           <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
             <div>
               <div style="font-weight:700;font-size:1.1em;">Received from Family</div>
@@ -149,8 +134,8 @@
               <span style="color:#1db954;">+$10,000.00</span>
             </div>
           </div>
-          <!-- Hidden transactions -->
-          <div id="hidden-transactions" class="hidden-transactions" style="gap:16px;">
+          <!-- Hidden transactions (Apr to Jan, in descending order, with spacing) -->
+          <div id="hidden-transactions" class="hidden-transactions" style="display:flex;flex-direction:column;gap:16px;">
             <div class="transaction-card" style="background:#fff;padding:16px 20px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;">
               <div>
                 <div style="font-weight:700;font-size:1.1em;">Dining Out</div>
