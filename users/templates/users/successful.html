@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 
 
@@ -24,7 +25,7 @@
           <h2 style="text-align:center;margin-top:12px;">Transfer Successful</h2>
           <p class="success-note" style="text-align:center;font-size:1.1em;margin-bottom:18px;">
             {% if amount %}
-              Your ${{ amount|stringformat:"d" }} transfer to <strong>{{ account_name }}</strong>{% if bank_name %} at <strong>{{ bank_name }}</strong>{% endif %} has been completed.
+              Your ${{ amount|intcomma }} transfer to <strong>{{ account_name }}</strong>{% if bank_name %} at <strong>{{ bank_name }}</strong>{% endif %} has been completed.
             {% else %}
               Transfer to <strong>{{ account_name }}</strong>{% if bank_name %} at <strong>{{ bank_name }}</strong>{% endif %} has been completed.
             {% endif %}
@@ -40,7 +41,7 @@
               <li><strong>From:</strong> Barclays Bank</li>
               <li><strong>To:</strong> {% if bank_name %}{{ bank_name }}{% else %}{{ account_number }}{% endif %}</li>
               <li><strong>Account No.:</strong> {{ account_number }}</li>
-              <li><strong>Amount:</strong> {% if amount %}${{ amount|stringformat:"d" }}{% else %}N/A{% endif %}</li>
+              <li><strong>Amount:</strong> {% if amount %}${{ amount|intcomma }}{% else %}N/A{% endif %}</li>
               <li><strong>Reference:</strong> {{ reference }}</li>
               <li><strong>Description:</strong> {{ description }}</li>
             </ul>
