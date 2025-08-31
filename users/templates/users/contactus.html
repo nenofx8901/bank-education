@@ -16,46 +16,19 @@
     
     
     <section class="section">
-        <div class="row">
-          <div class="">
-  
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Contact Us</h5>
-                <P>If you have any query, complaint or suggestions, feel free to contact us. We will try our best to get in contact with you as soon as possible.</p>
+                <p>If you have any query, complaint or suggestions, feel free to contact us. We will try our best to get in contact with you as soon as possible.</p>
                 <a href="https://wa.me/12256780173" target="_blank" class="btn btn-success mb-3">Contact Support on WhatsApp</a>
-                <!-- General Form Elements -->
-              <form>
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Subject</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="inputText" class="col-sm-2 col-form-label">Reason</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control">
-                    </div>
-                  </div>
-              
-
-                <div class="row mb-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Message</label>
-                    <div class="col-sm-10">
-                      <textarea class="form-control" style="height: 100px"></textarea>
-                    </div>
-                  </div>
-
-               
-                  <div class="" style="text-align:center;">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                
-
-              </form><!-- End General Form Elements -->
-
+              </div>
+            </div>
+            <!-- Large Chat Box Below Card -->
+            <div style="width:100%;max-width:900px;margin:32px auto 0 auto;">
+              <div style="text-align:center;font-size:1.15em;font-weight:500;margin-bottom:8px;color:#007bff;">Chat with a live agent.</div>
+              <div style="height:600px;box-shadow:0 2px 16px rgba(0,0,0,0.08);border-radius:18px;overflow:hidden;">
+                <iframe src="https://direct.lc.chat/19286162/" style="width:100%;height:100%;border:none;"></iframe>
+              </div>
             </div>
           </div>
 
@@ -64,6 +37,29 @@
 </section>
 
       
+  <!-- Live Chat Modal -->
+  <div id="liveChatModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;">
+    <div style="background:#fff;width:100vw;height:100vh;display:flex;flex-direction:column;">
+      <div style="padding:16px;background:#007bff;color:#fff;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:1.2em;font-weight:600;">Live Chat Support</span>
+        <button onclick="closeLiveChat()" style="background:none;border:none;color:#fff;font-size:1.5em;cursor:pointer;">&times;</button>
+      </div>
+      <iframe src="https://direct.lc.chat/19286162/" style="flex:1;border:none;width:100%;height:100%;"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const liveChatBtn = document.getElementById('liveChatBtn');
+    const liveChatModal = document.getElementById('liveChatModal');
+    function openLiveChat() {
+      liveChatModal.style.display = 'flex';
+    }
+    function closeLiveChat() {
+      liveChatModal.style.display = 'none';
+    }
+    liveChatBtn.addEventListener('click', openLiveChat);
+  </script>
+
   </main><!-- End #main -->
   
   {% endblock content %}
